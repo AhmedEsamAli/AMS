@@ -1,0 +1,12 @@
+const express = require('express');
+const bidderAuthorized = require('../middleware/authorizeBidder');
+const AuctionController = require('../controllers/Auction/AuctionController');
+const BidderController = require('../controllers/Bidder/BidderController');
+const Bidder = require('../Classes/Bidder');
+const router = express.Router();
+router.get('/search', bidderAuthorized,AuctionController.nameSearch);
+router.get('/getAll', bidderAuthorized,AuctionController.getAll);
+router.get('/category',bidderAuthorized, AuctionController.categorySearch);
+router.get('/wonAuctions',bidderAuthorized, BidderController.getWinnerAndPurchase);
+router.post('/placeBid/:id', bidderAuthorized,BidderController.makeBid);
+module.exports = router;
